@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path d="M0 0L240 0L240 240L0 240L0 0Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="twitch">
+    <path d="M0 0L240 0L240 240L0 240L0 0Z" id="Background" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd" stroke="none" />
+    <path d="M42.65 30L30 62.36L30 194.59L75.02 194.59L75.02 210L100.33 218.5L124.25 194.59L160.83 194.59L210.06 145.35L210.06 30L42.65 30L42.65 30ZM193.17 136.91L165.04 165.05L120.02 165.05L96.11 188.96L96.11 165.05L58.13 165.05L58.13 46.88L193.17 46.88L193.17 136.91L193.17 136.91ZM165.05 79.24L165.05 128.47L148.17 128.47L148.17 79.24L165.05 79.24L165.05 79.24ZM120.03 79.24L120.03 128.47L103.15 128.47L103.15 79.24L120.03 79.24L120.03 79.24Z" id="Shape" fill="#FFFFFF" fill-rule="evenodd" stroke="none" />
+  </g>
+</svg>

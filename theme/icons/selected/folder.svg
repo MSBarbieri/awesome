@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="200" y2="160" id="gradient_1">
+      <stop offset="0%" stop-color="#87B3A4" />
+      <stop offset="50.470085%" stop-color="#7690B0" />
+      <stop offset="100%" stop-color="#3E4C52" />
+    </linearGradient>
+    <path d="M0 0L240 0L240 240L0 240L0 0Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="folder">
+    <path d="M0 0L240 0L240 240L0 240L0 0Z" id="Background" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd" stroke="none" />
+    <path d="M100 40L40 40C28.9 40 20 48.9 20 60L20 180C20 191.046 28.9543 200 40 200L200 200C211.046 200 220 191.046 220 180L220 80C220 68.9 211 60 200 60L120 60L100 40L100 40Z" id="Shape" fill="url(#gradient_1)" stroke="none" />
+  </g>
+</svg>

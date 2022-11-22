@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="180" y2="200" id="gradient_1">
+      <stop offset="0%" stop-color="#87B3A4" />
+      <stop offset="50.470085%" stop-color="#7690B0" />
+      <stop offset="100%" stop-color="#3E4C52" />
+    </linearGradient>
+    <path d="M0 0L240 0L240 240L0 240L0 0Z" id="path_1" />
+    <clipPath id="mask_1">
+      <use xlink:href="#path_1" />
+    </clipPath>
+  </defs>
+  <g id="flask">
+    <path d="M0 0L240 0L240 240L0 240L0 0Z" id="Background" fill="#FFFFFF" fill-opacity="0" fill-rule="evenodd" stroke="none" />
+    <path d="M60 220C43.4315 220 30 206.569 30 190C30 184 31.8 178.4 35 173.7L90 78.1L90 60C84.4771 60 80 55.5228 80 50L80 40C80 28.9543 88.9543 20 100 20L140 20C151.046 20 160 28.9543 160 40L160 50C160 55.5228 155.523 60 150 60L150 78.1L205 173.7C208.2 178.4 210 184 210 190C210 206.569 196.569 220 180 220L60 220M50 190C50 195.523 54.4772 200 60 200L180 200C185.523 200 190 195.523 190 190C190 187.9 189.3 185.9 188.2 184.3L165.3 144.7L140 170L89.3 119.3L51.8 184.3C50.7 185.9 50 187.9 50 190M130 100C124.477 100 120 104.477 120 110C120 115.523 124.477 120 130 120C135.523 120 140 115.523 140 110C140 104.477 135.523 100 130 100L130 100Z" id="Shape" fill="url(#gradient_1)" fill-rule="evenodd" stroke="none" />
+  </g>
+</svg>
