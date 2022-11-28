@@ -18,7 +18,7 @@ require("module").setup({
   startup_scripts = {
     --   'picom --config=$HOME/.config/picom/picom.conf --experimental-backends',
     -- 'blueberry-tray'
-    '/usr/local/bin/emacs --daemon'
+    -- '/usr/local/bin/emacs --daemon'
   }
 })
 require("config").setup({

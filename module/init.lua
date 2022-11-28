@@ -4,7 +4,6 @@ local auto_start = require('module.auto-start')
 local exit_screen_setup = require('module.exit-screen')
 local decorate = require('module.decorate-client')
 local backdrop = require('module.backdrop')
-local redshift = require('module.redshift')
 -- require('module.quake-terminal')
 
 local Default = {
@@ -27,7 +26,6 @@ M.setup = function(opts)
   decorate(opts)
   backdrop(opts)
   exit_screen_setup(opts)
-  redshift(opts)
 
 end
 

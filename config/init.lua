@@ -9,8 +9,8 @@ local M = {}
 local Default = {
   apps = {
     terminal = 'kitty',
-    editor = 'emacsclient -c -a "emacs"',
-    browser = 'brave',
+    editor = 'kitty ' .. os.getenv('HOME') .. '/.local/bin/tmux-sessionizer ' .. os.getenv('HOME') .. '/dev/repos/',
+    browser = 'brave-browser',
   },
   keys = {
     mod = 'Mod4',

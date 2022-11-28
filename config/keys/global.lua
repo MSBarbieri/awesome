@@ -1,5 +1,4 @@
 local awful = require('awful')
-local redshift = require("awesome-redshift")
 require('awful.autofocus')
 local beautiful     = require('beautiful')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
@@ -22,11 +21,6 @@ local setup_keys    = function(opts)
     -- Tag browsing
     awful.key({ keys.mod }, 'w', awful.tag.viewprev, { description = 'view previous', group = 'tag' }),
     awful.key({ keys.mod }, 's', awful.tag.viewnext, { description = 'view next', group = 'tag' }),
-    awful.key({ keys.mod }, 'd', function()
-      -- utils.log("toggle", redshift)
-      redshift.toggle()
-      redshift.dim()
-    end, { description = 'view next', group = 'tag' }),
     -- Default client focus
     awful.key(
       { keys.mod },
@@ -163,17 +157,17 @@ local setup_keys    = function(opts)
       { keys.mod, keys.ctrl },
       'h',
       function()
-        awful.tag.incncol(1, nil, true)
+        awful.tag.incmwfact(-0.01)
       end,
-      { description = 'increase the number of columns', group = 'layout' }
+      { description = 'decrease master width factor', group = 'layout' }
     ),
     awful.key(
       { keys.mod, keys.ctrl },
       'l',
       function()
-        awful.tag.incncol(-1, nil, true)
+        awful.tag.incmwfact(0.01)
       end,
-      { description = 'decrease the number of columns', group = 'layout' }
+      { description = 'increase master width factor', group = 'layout' }
     ),
     awful.key(
       { keys.mod, keys.ctrl },
