@@ -73,6 +73,7 @@ local function setup_tags(opts)
 
   awful.layout.layouts = {
     awful.layout.suit.tile,
+    awful.layout.suit.tile.bottom,
     awful.layout.suit.max
   }
 

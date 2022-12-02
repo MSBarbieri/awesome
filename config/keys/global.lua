@@ -131,6 +131,28 @@ local setup_keys    = function(opts)
     ),
     awful.key(
       { keys.mod, keys.sft },
+      's',
+      function()
+        local len = 0
+        local max = 0
+        local tag = awful.screen.focused().selected_tag
+
+        for i, l in pairs(awful.layout.layouts) do
+          if l == tag.layout then
+            len = i
+          end
+          max = i
+        end
+        if len == max then
+          tag.layout = tag.layouts[1]
+        else
+          tag.layout = tag.layouts[len + 1]
+        end
+      end,
+      { description = 'change tag layout', group = 'layout' }
+    ),
+    awful.key(
+      { keys.mod, keys.sft },
       'l',
       function()
         awful.client.swap.bydirection('right', c)
@@ -143,7 +165,7 @@ local setup_keys    = function(opts)
       function()
         awful.client.swap.bydirection('down', c)
       end,
-      { description = 'decrease the number of master clients', group = 'layout' }
+      { description = 'move client down', group = 'layout' }
     ),
     awful.key(
       { keys.mod, keys.sft },
@@ -151,7 +173,7 @@ local setup_keys    = function(opts)
       function()
         awful.client.swap.bydirection('up', c)
       end,
-      { description = 'decrease the number of master clients', group = 'layout' }
+      { description = 'move client up', group = 'layout' }
     ),
     awful.key(
       { keys.mod, keys.ctrl },
@@ -164,6 +186,21 @@ local setup_keys    = function(opts)
     awful.key(
       { keys.mod, keys.ctrl },
       'l',
+      function()
+        awful.tag.incmwfact(0.01)
+      end,
+      { description = 'increase master width factor', group = 'layout' }
+    ), awful.key(
+      { keys.mod, keys.ctrl },
+      'k',
+      function()
+        awful.tag.incmwfact(-0.01)
+      end,
+      { description = 'decrease master width factor', group = 'layout' }
+    ),
+    awful.key(
+      { keys.mod, keys.ctrl },
+      'j',
       function()
         awful.tag.incmwfact(0.01)
       end,
