@@ -98,7 +98,7 @@ local function setup_theme(opts)
   -- Borders
   theme.border_width = opts.border_width or dpi(2)
   theme.border_normal = theme.background.hue_800
-  theme.border_focus = '#81A1C1FF'
+  theme.border_focus = '#222222'
 
   theme.notification_border_color = '#81A1C1FF'
   theme.notification_bg = "#81A1C144"

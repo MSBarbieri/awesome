@@ -3,6 +3,7 @@ require("error_handler")
 
 require('theme').setup({
   wallpaper = "/home/matheus-barbieri/Pictures/wallpapers/wallpaper"
+  -- wallpaper = "#080808"
 })
 
 require('layout').setup({
@@ -21,6 +22,7 @@ require("module").setup({
     -- '/usr/local/bin/emacs --daemon'
   }
 })
+
 require("config").setup({
   apps = {
     --   terminal = 'kitty',
