@@ -12,7 +12,6 @@ local function setup_client_keys(opts)
       function(c)
         c.fullscreen = not c.fullscreen
         c:raise()
-        utils.log("client fullscreen", tostring(not c.fullscreen))
       end,
       { description = 'toggle fullscreen', group = 'client' }
     ),
