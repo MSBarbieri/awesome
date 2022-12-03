@@ -23,6 +23,12 @@ local function run_auto_start(opts)
   for _, app in ipairs(opts.startup_scripts) do
     run_once(app)
   end
+
+  awesome.connect_signal('loaded', function()
+    for _, app in ipairs(opts.lazy_scripts) do
+      run_once(app)
+    end
+  end)
 end
 
 return run_auto_start

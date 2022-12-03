@@ -12,6 +12,7 @@ require('layout').setup({
   -- area = "twitch",
 })
 
+local awful = require('awful')
 require("module").setup({
   -- apps = {
   --   lock = nil,
@@ -19,6 +20,11 @@ require("module").setup({
   startup_scripts = {
     { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
     { cmd = 'spotify' },
+  },
+  lazy_scripts = {
+    { cmd = "kitty" },
+    { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done' },
+    { cmd = os.getenv('HOME') .. '/.local/scripts/start_animated_background' }
   }
 })
 

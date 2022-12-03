@@ -36,6 +36,7 @@ M.setup = function(opts)
   rules.setup(opts, keys, buttons)
   -- rules.tag_rules(tags)
 
+  awesome.emit_signal("loaded")
   return {
     keys, buttons
   }

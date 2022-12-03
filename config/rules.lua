@@ -24,6 +24,12 @@ local function setup_rules(_, keys, buttons)
       }
     },
     {
+      rule_any = { class = { 'Spotify' } },
+      properties = {
+        tag = screen[1].tags[8]
+      }
+    },
+    {
       rule_any = { type = { 'dialog' }, class = { 'Wicd-client.py', 'calendar.google.com' } },
       properties = {
         placement = awful.placement.centered,
