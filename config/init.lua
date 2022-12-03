@@ -26,14 +26,13 @@ M.setup = function(opts)
   opts = opts or {}
   opts = utils.merge_table(opts, Default)
 
-  terminal = opts.apps.terminal
-  editor = opts.apps.editor
-  editor_cmd = opts.apps.terminal .. opts.apps.editor
+  -- terminal = opts.apps.terminal
+  -- editor = opts.apps.editor
 
   local keys = keys_setup(opts)
   root.keys(keys.global)
   local buttons = buttons_setup(opts)
-  local tags = tags_setup(opts)
+  tags_setup(opts)
   signals_setup(opts)
   rules.setup(opts, keys, buttons)
   -- rules.tag_rules(tags)
