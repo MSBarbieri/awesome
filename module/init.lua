@@ -11,15 +11,14 @@ local Default = {
     lock = nil,
   },
   startup_scripts = {
-    'picom --config=$HOME/.config/picom/picom.conf --experimental-backends',
-    'blueberry-tray'
+    { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
   }
 }
 local M = {}
 
 M.setup = function(opts)
   opts = opts or {}
-  opts = utils.merge_table(opts, Default)
+  opts = utils.merge_table(Default, opts)
 
   auto_start(opts)
   notifications_setup(opts)

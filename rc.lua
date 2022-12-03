@@ -17,9 +17,8 @@ require("module").setup({
   --   lock = nil,
   -- },
   startup_scripts = {
-    --   'picom --config=$HOME/.config/picom/picom.conf --experimental-backends',
-    -- 'blueberry-tray'
-    -- '/usr/local/bin/emacs --daemon'
+    { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
+    { cmd = 'spotify' },
   }
 })
 
