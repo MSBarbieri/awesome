@@ -9,7 +9,9 @@ local M = {}
 local Default = {
   apps = {
     terminal = 'kitty',
-    editor = 'kitty ' .. os.getenv('HOME') .. '/.local/bin/tmux-sessionizer ' .. os.getenv('HOME') .. '/dev/repos/',
+    editor = 'kitty ' ..
+        os.getenv('HOME') .. '/.local/bin/tmux-sessionizer ' ..
+        os.getenv('HOME') .. '/dev/repos/MSBarbieri',
     browser = 'brave-browser',
   },
   keys = {
