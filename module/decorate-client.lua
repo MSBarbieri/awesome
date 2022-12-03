@@ -25,7 +25,7 @@ local function setup(_)
         gears.shape.rectangle(cr, w, h)
       end
     elseif client.rendering_mode == 'tiled' then
-      client.border_width = beautiful.border_width
+      client.border_width = 0
       client.shape = gears.shape.rectangle
       client.border_color = beautiful.border_focus
     end
