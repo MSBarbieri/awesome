@@ -6,7 +6,7 @@ local awful = require('awful')
 local function run_auto_start(opts)
   local function run_once(script)
     if script.opts then
-      awful.spawn(script.cmd, script.opts)
+      awful.spawn.once(script.cmd, script.opts)
     else
       local cmd = script.cmd
       local findme = cmd
