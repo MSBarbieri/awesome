@@ -1,9 +1,6 @@
 local awful = require('awful')
 require('awful.autofocus')
-local beautiful     = require('beautiful')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
-local naughty       = require("naughty")
-local utils         = require('utils')
 local setup_keys    = function(opts)
   local keys = opts.keys
 

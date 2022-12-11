@@ -18,8 +18,16 @@ local function setup_client_keys(opts)
     awful.key(
       { keys.mod },
       'r',
-      function(c)
+      function(_)
         awful.tag.setmwfact(0.25)
+      end,
+      { description = 'toggle fullscreen', group = 'client' }
+    ),
+    awful.key(
+      { keys.mod },
+      'c',
+      function(_)
+        awful.tag.setmwfact(0.5)
       end,
       { description = 'toggle fullscreen', group = 'client' }
     ),
