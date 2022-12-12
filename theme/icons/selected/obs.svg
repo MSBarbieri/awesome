@@ -3,7 +3,7 @@
   <defs>
     <linearGradient gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="239.99962" y2="239.99962" id="gradient_1">
       <stop offset="0%" stop-color="#87B3A4" />
-      <stop offset="50.470085%" stop-color="#7690B0" />
+      <stop offset="50%" stop-color="#7690B0" />
       <stop offset="100%" stop-color="#3E4C52" />
     </linearGradient>
     <path d="M0 0L243.47 0L243.47 243.47L0 243.47L0 0Z" id="path_1" />
