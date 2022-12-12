@@ -25,8 +25,8 @@ local function setup_theme(opts)
   theme.accent = mat_colors.pink
 
   theme.background = mat_colors.blue_grey
-  theme.background.hue_800 = '#242D31'
-  theme.background.hue_900 = '#3F4B5044'
+  theme.background.hue_800 = '#262626'
+  theme.background.hue_900 = '#58585844'
 
   theme.dir = os.getenv('HOME') .. '/.config/awesome/theme'
   --theme.dir             = os.getenv("HOME") .. "/code/awesome-pro/themes/pro-dark"
