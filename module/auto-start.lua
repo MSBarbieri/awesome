@@ -16,7 +16,7 @@ local function run_auto_start(opts)
       end
 
       local exec = string.format('pgrep -u $USER -x %s > /dev/null || (%s)', findme, cmd)
-      awful.spawn.with_shell(exec)
+      awful.spawn.easy_async_with_shell(exec)
     end
   end
 

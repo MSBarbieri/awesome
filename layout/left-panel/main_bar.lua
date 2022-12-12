@@ -2,7 +2,7 @@ local gears = require("gears")
 local beautiful = require('beautiful')
 local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
-local power_button_widget = require('layout.left-panel.power_button')
+local power_button_widget = require('layout.widgets.power_button')
 
 local TagList = require('widget.tag-list')
 

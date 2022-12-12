@@ -1,104 +1,12 @@
 local awful = require('awful')
 require('awful.autofocus')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
-local setup_keys    = function(opts)
+local layout        = require('layout')
+
+local function execute_apps(opts)
   local keys = opts.keys
 
-  local globalKeys =
-  awful.util.table.join(
-  -- Hotkeys
-    awful.key({ keys.mod }, 'F1', function()
-      hotkeys_popup.show_help(nil, awful.screen.focused())
-    end,
-      { description = 'show help', group = 'awesome' }),
-    awful.key({ keys.mod, keys.ctrl }, 'r', function()
-      _G.awesome.restart()
-    end, { description = 'reload awesome', group = 'awesome' }),
-    awful.key({ keys.mod, keys.ctrl }, 'q', _G.awesome.quit, { description = 'quit awesome', group = 'awesome' }),
-    -- Tag browsing
-    awful.key({ keys.mod }, 'w', awful.tag.viewprev, { description = 'view previous', group = 'tag' }),
-    awful.key({ keys.mod }, 's', awful.tag.viewnext, { description = 'view next', group = 'tag' }),
-    -- Default client focus
-    awful.key(
-      { keys.mod },
-      'm',
-      function()
-        client.focus.floating = not client.focus.floating
-      end,
-      { description = 'focus next by index', group = 'client' }
-    ),
-    awful.key(
-      { keys.mod },
-      'l',
-      function()
-        awful.client.focus.bydirection("right")
-      end,
-      { description = 'focus next by index', group = 'client' }
-    ),
-    awful.key(
-      { keys.mod },
-      'h',
-      function()
-        awful.client.focus.bydirection("left")
-      end,
-      { description = 'focus previous by index', group = 'client' }
-    ),
-    awful.key(
-      { keys.mod },
-      'j',
-      function()
-        awful.client.focus.bydirection("down")
-      end,
-      { description = 'focus previous by index', group = 'client' }
-    ),
-    awful.key(
-      { keys.mod },
-      'k',
-      function()
-        awful.client.focus.bydirection("up")
-      end,
-      { description = 'focus previous by index', group = 'client' }
-    ),
-    awful.key(
-      { keys.mod },
-      'e',
-      function()
-        screen.primary.left_panel:toggle(true)
-      end,
-      { description = 'show main menu', group = 'awesome' }
-    ),
-    awful.key(
-      { keys.mod, keys.ctrl },
-      'f',
-      function()
-        awful.screen.connect_for_each_screen(function(s)
-          s:emit_signal('toggle_layout')
-        end)
-      end,
-      { description = 'show main menu', group = 'awesome' }
-    ),
-    awful.key({ keys.mod }, 'u', awful.client.urgent.jumpto, { description = 'jump to urgent client', group = 'client' })
-    ,
-    awful.key(
-      { keys.mod },
-      'Tab',
-      function()
-        awful.client.focus.history.previous()
-        if _G.client.focus then
-          _G.client.focus:raise()
-        end
-      end,
-      { description = 'go back', group = 'client' }
-    ),
-    -- Programms
-    awful.key(
-      {},
-      'Print',
-      function()
-        awful.util.spawn_with_shell('maim -s | xclip -selection clipboard -t image/png')
-      end
-    ),
-    -- Standard program
+  return awful.util.table.join(
     awful.key(
       { keys.mod }, 'Return', function()
         awful.spawn(opts.apps.terminal)
@@ -106,29 +14,65 @@ local setup_keys    = function(opts)
       { description = 'open a terminal', group = 'launcher' }
     ),
     awful.key(
-      { keys.mod }, 'e', function()
+      { keys.mod }, 't', function()
         awful.spawn(opts.apps.editor)
       end,
       { description = 'open a editor', group = 'launcher' }
     ),
     awful.key({ keys.mod }, 'space', function()
-      awful.util.spawn_with_shell("./.config/rofi/launchers/type-4/launcher.sh")
+      awful.util.spawn_with_shell(opts.apps.launcher)
     end, { description = 'rofi rofi', group = 'launcher' }),
     awful.key({ keys.mod }, 'b', function()
       awful.util.spawn(opts.apps.browser)
     end, { description = 'open browser', group = 'launcher' }),
+    awful.key(
+      {},
+      'Print',
+      function()
+        awful.util.spawn_with_shell('maim -s | xclip -selection clipboard -t image/png')
+      end
+    )
+  )
+end
+
+local setup_keys = function(opts)
+  local keys = opts.keys
+
+  local globalKeys =
+  awful.util.table.join(
+    execute_apps(opts),
+    -- Hotkeys
+    awful.key({ keys.mod }, 'F1', function()
+      hotkeys_popup.show_help(nil, awful.screen.focused())
+    end,
+      { description = 'show help', group = 'awesome' }),
+    awful.key({ keys.mod, keys.ctrl }, 'r', function()
+      awesome.restart()
+    end, { description = 'reload awesome', group = 'awesome' }),
+    awful.key({ keys.mod, keys.ctrl }, 'q', awesome.quit, { description = 'quit awesome', group = 'awesome' }),
+    -- Tag browsing
+    awful.key({ keys.mod }, 'w', awful.tag.viewprev, { description = 'view previous', group = 'tag' }),
+    awful.key({ keys.mod }, 's', awful.tag.viewnext, { description = 'view next', group = 'tag' }),
+    awful.key(
+      { keys.mod, keys.sft },
+      'e',
+      function()
+        layout.toggle_info_panel()
+      end,
+      { description = 'toggle panel', group = 'awesome' }
+    ),
+    awful.key(
+      { keys.mod },
+      'e',
+      function()
+        layout.toggle()
+      end,
+      { description = 'toggle info panel', group = 'awesome' }
+    ),
     -- Layout
     awful.key(
       { keys.mod, keys.sft },
-      'h',
-      function()
-        awful.client.swap.bydirection('left', c)
-      end,
-      { description = 'increase the number of master clients', group = 'layout' }
-    ),
-    awful.key(
-      { keys.mod, keys.sft },
-      's',
+      'Tab',
       function()
         local len = 0
         local max = 0
@@ -148,80 +92,12 @@ local setup_keys    = function(opts)
       end,
       { description = 'change tag layout', group = 'layout' }
     ),
-    awful.key(
-      { keys.mod, keys.sft },
-      'l',
-      function()
-        awful.client.swap.bydirection('right', c)
-      end,
-      { description = 'decrease the number of master clients', group = 'layout' }
-    ),
-    awful.key(
-      { keys.mod, keys.sft },
-      'j',
-      function()
-        awful.client.swap.bydirection('down', c)
-      end,
-      { description = 'move client down', group = 'layout' }
-    ),
-    awful.key(
-      { keys.mod, keys.sft },
-      'k',
-      function()
-        awful.client.swap.bydirection('up', c)
-      end,
-      { description = 'move client up', group = 'layout' }
-    ),
-    awful.key(
-      { keys.mod, keys.ctrl },
-      'h',
-      function()
-        awful.tag.incmwfact(-0.01)
-      end,
-      { description = 'decrease master width factor', group = 'layout' }
-    ),
-    awful.key(
-      { keys.mod, keys.ctrl },
-      'l',
-      function()
-        awful.tag.incmwfact(0.01)
-      end,
-      { description = 'increase master width factor', group = 'layout' }
-    ), awful.key(
-      { keys.mod, keys.ctrl },
-      'k',
-      function()
-        awful.tag.incmwfact(-0.01)
-      end,
-      { description = 'decrease master width factor', group = 'layout' }
-    ),
-    awful.key(
-      { keys.mod, keys.ctrl },
-      'j',
-      function()
-        awful.tag.incmwfact(0.01)
-      end,
-      { description = 'increase master width factor', group = 'layout' }
-    ),
-    awful.key(
-      { keys.mod, keys.ctrl },
-      'n',
-      function()
-        local c = awful.client.restore()
-        -- Focus restored client
-        if c then
-          _G.client.focus = c
-          c:raise()
-        end
-      end,
-      { description = 'restore minimized', group = 'client' }
-    ),
     -- Dropdown application
     awful.key(
       { keys.mod },
-      '`',
+      '$',
       function()
-        _G.toggle_quake()
+        toggle_quake()
       end,
       { description = 'dropdown application', group = 'launcher' }
     ),
@@ -303,7 +179,7 @@ local setup_keys    = function(opts)
       {},
       'XF86PowerOff',
       function()
-        _G.exit_screen_show()
+        exit_screen_show()
       end,
       { description = 'toggle mute', group = 'hotkeys' }
     )
@@ -355,10 +231,10 @@ local setup_keys    = function(opts)
         { keys.mod, keys.sft },
         '#' .. i + 9,
         function()
-          if _G.client.focus then
-            local tag = _G.client.focus.screen.tags[i]
+          if client.focus then
+            local tag = client.focus.screen.tags[i]
             if tag then
-              _G.client.focus:move_to_tag(tag)
+              client.focus:move_to_tag(tag)
             end
           end
         end,
@@ -369,10 +245,10 @@ local setup_keys    = function(opts)
         { keys.mod, keys.ctrl, keys.sft },
         '#' .. i + 9,
         function()
-          if _G.client.focus then
-            local tag = _G.client.focus.screen.tags[i]
+          if client.focus then
+            local tag = client.focus.screen.tags[i]
             if tag then
-              _G.client.focus:toggle_tag(tag)
+              client.focus:toggle_tag(tag)
             end
           end
         end,

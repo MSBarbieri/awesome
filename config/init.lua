@@ -12,7 +12,8 @@ local Default = {
     editor = 'kitty ' ..
         os.getenv('HOME') .. '/.local/bin/tmux-sessionizer ' ..
         os.getenv('HOME') .. '/dev/repos/MSBarbieri',
-    browser = 'brave-browser',
+    browser = 'firefox',
+    launcher = 'rofi -show drun',
   },
   keys = {
     mod = 'Mod4',
@@ -24,10 +25,7 @@ local Default = {
 
 M.setup = function(opts)
   opts = opts or {}
-  opts = utils.merge_table(opts, Default)
-
-  -- terminal = opts.apps.terminal
-  -- editor = opts.apps.editor
+  opts = utils.merge_table(Default, opts)
 
   local keys = keys_setup(opts)
   root.keys(keys.global)

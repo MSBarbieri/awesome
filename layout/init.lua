@@ -13,36 +13,46 @@ local default = {
   enabled = true,
 }
 
-local function updateBarsVisibility(_)
+function M.updateBarsVisibility(_)
   for s in screen do
     if s.selected_tag then
       local fullscreen = s.selected_tag.fullscreenMode
       -- Order matter here for shadow
-      s.top_panel.visible = not fullscreen and s.top_panel.enabled
+      s.top_panel.visible = not fullscreen and M.state.enabled
       if s.left_panel then
-        s.left_panel.visible = not fullscreen and s.left_panel.enabled
+        s.left_panel.visible = not fullscreen and M.state.enabled
       end
     end
   end
 end
 
-M.setup = function(opts)
+function M.setup(opts)
   opts = opts or {}
-  opts = utils.merge_table(default, opts)
+  M.state = utils.merge_table(default, opts)
   awful.screen.connect_for_each_screen(
     function(s)
       if s.index == 1 then
         -- Create the left_panel
-        s.top_panel = top_panel(opts, s)
-        s.left_panel = left_panel(opts, s)
+        s.top_panel = top_panel(M.state, s)
+        s.left_panel = left_panel(M.state, s)
       else
-        s.top_panel = top_panel(opts, s)
+        s.top_panel = top_panel(M.state, s)
       end
 
-      signals.screen_signals(s, updateBarsVisibility)
+      signals.screen_signals(s, M.updateBarsVisibility)
     end
   )
-  signals.setup_signals(updateBarsVisibility)
+  signals.setup_signals(M.updateBarsVisibility)
+end
+
+function M.toggle()
+  M.state.enabled = not M.state.enabled
+  M.updateBarsVisibility()
+end
+
+function M.toggle_info_panel()
+  M.state.opened = not M.state.opened
+  screen.primary:emit_signal('toggle_panel')
 end
 
 return M

@@ -4,12 +4,11 @@ local mat_icon            = require('widget.material.icon')
 local wibox               = require('wibox')
 local beautiful           = require('beautiful')
 local clickable_container = require('widget.material.clickable-container')
-local utils               = require('utils')
 
-local function bottom_buttons(opts, screen)
+local function bottom_buttons(state, _)
   local function button(name)
     local icon = icons[name]
-    if opts.area == name then
+    if state.area == name then
       icon = icons.selected[name]
     end
 

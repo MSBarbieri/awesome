@@ -30,10 +30,10 @@ add_button:buttons(
   )
 )
 
-local TopPanel = function(opts, s)
+local TopPanel = function(state, s)
   local window_size = nil
 
-  if opts.opened then
+  if state.opened then
     window_size = dpi(360)
   else
     window_size = dpi(80)
@@ -49,9 +49,7 @@ local TopPanel = function(opts, s)
       x = s.geometry.x + window_size,
       y = s.geometry.y,
       stretch = false,
-      -- opacity = 0,
       bg = beautiful.background.hue_800 .. "CC",
-      -- fg = beautiful.fg_normal,
       struts = {
         top = dpi(48)
       }
@@ -65,7 +63,7 @@ local TopPanel = function(opts, s)
   )
 
 
-  panel.enabled = opts.enabled
+  panel.enabled = state.enabled
   screen.connect_signal("menu::toggled", function()
     utils.log("signal", "works")
   end)

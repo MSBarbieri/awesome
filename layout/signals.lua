@@ -33,21 +33,20 @@ local function setup_signals(callback)
   )
 end
 
-local function screen_signals(s, callback)
+local function screen_signals(screen, callback)
   local dpi = require('beautiful').xresources.apply_dpi
 
-  s:connect_signal('opened', function()
-    s.top_panel.width = s.geometry.width - dpi(360)
-    s.top_panel.x = s.geometry.x + dpi(360)
-  end)
-  s:connect_signal('closed', function()
-    s.top_panel.width = s.geometry.width - dpi(80)
-    s.top_panel.x = s.geometry.x + dpi(80)
+  screen:connect_signal('toggle_panel', function(_, opened)
+    local size = dpi(80)
+    if opened then
+      size = dpi(360)
+    end
+
+    screen.top_panel.width = screen.geometry.width - size
+    screen.top_panel.x = screen.geometry.x + size
   end)
 
-  s:connect_signal('toggle_layout', function()
-    s.top_panel.enabled = not s.top_panel.enabled
-    s.left_panel.enabled = not s.left_panel.enabled
+  screen:connect_signal('toggle_layout', function()
     callback()
   end)
 end

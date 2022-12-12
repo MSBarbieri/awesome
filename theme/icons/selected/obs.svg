@@ -2,9 +2,9 @@
 <svg width="243.46997px" height="243.46997px" viewBox="0 0 243.46997 243.46997" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="239.99962" y2="239.99962" id="gradient_1">
-      <stop offset="0%" stop-color="#87B3A4" />
-      <stop offset="50%" stop-color="#7690B0" />
-      <stop offset="100%" stop-color="#3E4C52" />
+      <stop offset="0%" stop-color="#848484" />
+      <stop offset="50%" stop-color="#585858" />
+      <stop offset="100%" stop-color="#262626" />
     </linearGradient>
     <path d="M0 0L243.47 0L243.47 243.47L0 243.47L0 0Z" id="path_1" />
     <clipPath id="mask_1">

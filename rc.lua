@@ -3,20 +3,16 @@ require("error_handler")
 
 require('theme').setup({
   wallpaper = "/home/matheus-barbieri/Pictures/wallpapers/wallpaper"
-  -- wallpaper = "#080808"
+  -- wallpaper = "#555555"
 })
 
 require('layout').setup({
   enabled = true,
-  opened = true,
+  opened = false,
   area = "spotify",
 })
 
-local awful = require('awful')
 require("module").setup({
-  -- apps = {
-  --   lock = nil,
-  -- },
   startup_scripts = {
     { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
     { cmd = 'spotify' },
@@ -30,13 +26,7 @@ require("module").setup({
 
 require("config").setup({
   apps = {
-    --   terminal = 'kitty',
-    --   browser = 'brave',
+    browser = 'brave-browser',
+    launcher = os.getenv('HOME') .. "/.config/rofi/launchers/type-4/launcher.sh"
   },
-  -- keys = {
-  --   mod = 'Mod4',
-  --   alt = 'Mod1',
-  --   ctrl = 'Control',
-  --   sft = 'Shift',
-  -- }
 })
