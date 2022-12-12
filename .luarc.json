@@ -3,11 +3,16 @@
     "Lua.diagnostics.globals": [
         "vim",
         "lvim",
+        "nvim",
         "packer_plugins",
         "reload",
         "screen",
         "client",
         "tag",
-        "mouse"
-    ]
+        "mouse",
+        "awesome",
+        "root",
+        "c"
+    ],
+    "Lua.workspace.checkThirdParty": false
 }
