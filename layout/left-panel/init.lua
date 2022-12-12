@@ -2,13 +2,12 @@ local awful = require('awful')
 local gears = require("gears")
 local beautiful = require('beautiful')
 local wibox = require('wibox')
--- local apps = require('configuration.apps')
-local TagList = require('widget.tag-list')
 local dpi = require('beautiful').xresources.apply_dpi
 local mat_icon = require('widget.material.icon')
 local icons = require('theme.icons')
 local widgets = require('layout.widgets')
 local clickable_container = require('widget.material.clickable-container')
+local main_bar_widget = require('layout.left-panel.main_bar')
 
 local left_panel = function(opts, screen)
   local action_bar_width = dpi(80)
@@ -60,16 +59,6 @@ local left_panel = function(opts, screen)
     end
   end
 
-  local power_button = wibox.widget {
-    {
-      icon = icons.power,
-      size = dpi(24),
-      widget = mat_icon,
-    },
-    widget = clickable_container
-  }
-
-
   local plus_button = wibox.widget {
     {
       icon = icons.plus,
@@ -79,18 +68,6 @@ local left_panel = function(opts, screen)
     widget = clickable_container
   }
 
-  power_button:buttons(
-    gears.table.join(
-      awful.button(
-        {},
-        1,
-        nil,
-        function()
-          exit_screen_show()
-        end
-      )
-    )
-  )
 
   plus_button:buttons(
     gears.table.join(
@@ -113,69 +90,6 @@ local left_panel = function(opts, screen)
     }
   end
 
-  local main_bar = wibox.widget {
-    {
-      {
-        shape = function(cr, w, h)
-          return gears.shape.partially_rounded_rect(cr, w, h, false, false, true, false, 200)
-        end,
-        widget = wibox.container.background,
-        bg = beautiful.background.hue_900,
-        {
-          power_button,
-          widget = wibox.container.margin,
-          bottom = dpi(20),
-        }
-        , -- top icon
-      },
-      bg = beautiful.background.hue_800,
-      widget = wibox.container.background,
-    },
-    {
-      {
-        {
-          {
-            shape = function(cr, w, h)
-              return gears.shape.partially_rounded_rect(cr, w, h, true, false, false, true, 200)
-            end,
-            widget = wibox.container.background,
-            bg = beautiful.background.hue_800,
-            {
-              widget = wibox.container.margin,
-              top = dpi(30),
-              bottom = dpi(30),
-              TagList(screen),
-            }
-          },
-          widget = wibox.container.margin,
-          left = 8,
-        },
-        bg = beautiful.background.hue_900,
-        widget = wibox.container.background,
-      },
-      bg = beautiful.background.hue_800,
-      widget = wibox.container.background,
-    },
-    {
-      {
-        widget = wibox.container.background,
-        bg = beautiful.background.hue_900,
-        shape = function(cr, w, h)
-          return gears.shape.partially_rounded_rect(cr, w, h, false, true, false, false, 200)
-        end,
-        {
-          nil,
-          widget = wibox.container.margin,
-          top = dpi(100),
-        }
-        --last part of task menu
-      },
-      widget = wibox.container.background,
-      bg = beautiful.background.hue_800,
-    },
-    forced_width = dpi(80),
-    layout = wibox.layout.align.vertical,
-  }
 
   local second_menu_color = gears.color.create_pattern({
     type = "linear",
@@ -187,12 +101,13 @@ local left_panel = function(opts, screen)
   local main_bar2 = wibox.widget {
     {
       widget = wibox.container.background,
-      bg = second_menu_color,
+      bg = beautiful.background.hue_800 .. "CC",
       {
         forced_height = dpi(48),
         widget = wibox.container.margin,
         bottom = 1,
         color = "#FFFFFF" .. "22",
+        -- TODO: name left panel
         empty_with_margin({ text = "foo", widget = wibox.widget.textbox }), -- top part
       },
     },
@@ -201,6 +116,7 @@ local left_panel = function(opts, screen)
       bg = second_menu_color,
       {
         widget = wibox.container.background,
+        -- TODO: fill left panel app content
         empty_with_margin(nil) -- main content
       }
     },
@@ -219,7 +135,7 @@ local left_panel = function(opts, screen)
     nil,
     {
       layout = wibox.layout.align.horizontal,
-      main_bar,
+      main_bar_widget(opts, screen),
       main_bar2,
     },
     {
@@ -235,7 +151,7 @@ local left_panel = function(opts, screen)
         widget = wibox.container.background,
         bg = beautiful.background.hue_800,
         forced_height = dpi(80),
-        widgets.bottom_buttons(screen)
+        widgets.bottom_buttons(opts, screen)
       },
       nil
     }

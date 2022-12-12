@@ -1,8 +1,7 @@
 local awful = require('awful')
 local left_panel = require('layout.left-panel')
 local top_panel = require('layout.top-panel')
-local setup_signals = require('layout.signals')
-local dpi = require('beautiful').xresources.apply_dpi
+local signals = require('layout.signals')
 local utils = require("utils")
 -- Create a wibox for each screen and add it
 
@@ -14,7 +13,7 @@ local default = {
   enabled = true,
 }
 
-local function updateBarsVisibility(event)
+local function updateBarsVisibility(_)
   for s in screen do
     if s.selected_tag then
       local fullscreen = s.selected_tag.fullscreenMode
@@ -40,23 +39,10 @@ M.setup = function(opts)
         s.top_panel = top_panel(opts, s)
       end
 
-      s:connect_signal('opened', function()
-        s.top_panel.width = s.geometry.width - dpi(360)
-        s.top_panel.x = s.geometry.x + dpi(360)
-      end)
-      s:connect_signal('closed', function()
-        s.top_panel.width = s.geometry.width - dpi(80)
-        s.top_panel.x = s.geometry.x + dpi(80)
-      end)
-
-      s:connect_signal('toggle_layout', function()
-        s.top_panel.enabled = not s.top_panel.enabled
-        s.left_panel.enabled = not s.left_panel.enabled
-        updateBarsVisibility()
-      end)
+      signals.screen_signals(s, updateBarsVisibility)
     end
   )
-  setup_signals(updateBarsVisibility)
+  signals.setup_signals(updateBarsVisibility)
 end
 
 return M

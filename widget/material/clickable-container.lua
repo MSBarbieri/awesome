@@ -1,8 +1,8 @@
 local wibox = require('wibox')
 
-function build(widget)
+function build(widget, button_release)
   local container =
-    wibox.widget {
+  wibox.widget {
     widget,
     widget = wibox.container.background
   }
@@ -43,6 +43,9 @@ function build(widget)
     'button::release',
     function()
       container.bg = '#ffffff11'
+      if button_release then
+        button_release()
+      end
     end
   )
 

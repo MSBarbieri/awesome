@@ -7,9 +7,9 @@ require('theme').setup({
 })
 
 require('layout').setup({
-  enabled = false,
-  opened = false,
-  -- area = "twitch",
+  enabled = true,
+  opened = true,
+  area = "spotify",
 })
 
 local awful = require('awful')
@@ -23,7 +23,7 @@ require("module").setup({
   },
   lazy_scripts = {
     { cmd = "kitty" },
-    { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done' },
+    -- { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done' },
     { cmd = os.getenv('HOME') .. '/.local/scripts/start_animated_background' }
   }
 })

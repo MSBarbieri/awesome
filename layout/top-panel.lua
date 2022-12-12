@@ -1,12 +1,10 @@
-local awful               = require('awful')
-local beautiful           = require('beautiful')
-local wibox               = require('wibox')
-local TaskList            = require('widget.task-list')
-local gears               = require('gears')
-local clickable_container = require('widget.material.clickable-container')
-local mat_icon_button     = require('widget.material.icon-button')
-local mat_icon            = require('widget.material.icon')
-local utils               = require('utils')
+local awful           = require('awful')
+local beautiful       = require('beautiful')
+local wibox           = require('wibox')
+local gears           = require('gears')
+local mat_icon_button = require('widget.material.icon-button')
+local mat_icon        = require('widget.material.icon')
+local utils           = require('utils')
 
 local dpi = require('beautiful').xresources.apply_dpi
 
@@ -23,7 +21,7 @@ add_button:buttons(
         awful.spawn(
           awful.screen.focused().selected_tag.defaultApp,
           {
-            tag = _G.mouse.screen.selected_tag,
+            tag = mouse.screen.selected_tag,
             placement = awful.placement.bottom_right
           }
         )
@@ -31,45 +29,6 @@ add_button:buttons(
     )
   )
 )
-
--- Create an imagebox widget which will contains an icon indicating which layout we're using.
--- We need one layoutbox per screen.
-local LayoutBox = function(s)
-  local layoutBox = clickable_container(awful.widget.layoutbox(s))
-  layoutBox:buttons(
-    awful.util.table.join(
-      awful.button(
-        {},
-        1,
-        function()
-          awful.layout.inc(1)
-        end
-      ),
-      awful.button(
-        {},
-        3,
-        function()
-          awful.layout.inc(-1)
-        end
-      ),
-      awful.button(
-        {},
-        4,
-        function()
-          awful.layout.inc(1)
-        end
-      ),
-      awful.button(
-        {},
-        5,
-        function()
-          awful.layout.inc(-1)
-        end
-      )
-    )
-  )
-  return layoutBox
-end
 
 local TopPanel = function(opts, s)
   local window_size = nil
