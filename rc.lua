@@ -7,9 +7,9 @@ require('theme').setup({
 })
 
 require('layout').setup({
-  enabled = true,
+  enabled = false,
   opened = false,
-  area = "spotify",
+  area = "twitch",
 })
 
 require("module").setup({
@@ -27,6 +27,9 @@ require("module").setup({
 require("config").setup({
   apps = {
     browser = 'brave-browser',
-    launcher = os.getenv('HOME') .. "/.config/rofi/launchers/type-4/launcher.sh"
+    launcher = os.getenv('HOME') .. "/.config/rofi/launchers/type-4/launcher.sh",
+    editor = 'kitty ' ..
+        os.getenv('HOME') .. '/.local/bin/tmux-sessionizer ' ..
+        os.getenv('HOME'),
   },
 })

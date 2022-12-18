@@ -3,7 +3,7 @@ local beautiful = require('beautiful')
 local wibox = require('wibox')
 local dpi = require('beautiful').xresources.apply_dpi
 
-local function info_bar(_, _)
+local function info_bar(opts, screen)
 
   local second_menu_color = gears.color.create_pattern({
     type = "linear",
@@ -12,14 +12,17 @@ local function info_bar(_, _)
     stops = { { 0, beautiful.background.hue_800 .. "CC" }, { 1, "#00000000" } }
   })
 
-  local empty_with_margin = function(comp)
-    return {
-      comp,
-      widget = wibox.container.margin,
-      bottom = dpi(20),
-    }
-  end
+  local text = wibox.widget.textbox(opts.area)
 
+  screen:connect_signal('info_area', function()
+    text:set_markup_silently(opts.area)
+  end)
+
+  local title = {
+    text,
+    widget = wibox.container.margin,
+    bottom = dpi(20),
+  }
 
   local info_bar_widget = wibox.widget {
     {
@@ -30,11 +33,8 @@ local function info_bar(_, _)
         widget = wibox.container.margin,
         bottom = 1,
         color = "#FFFFFF" .. "22",
+        title
         -- TODO: name left panel
-        empty_with_margin({
-          text = "foo",
-          widget = wibox.widget.textbox
-        }), -- top part
       },
     },
     {
@@ -43,7 +43,7 @@ local function info_bar(_, _)
       {
         widget = wibox.container.background,
         -- TODO: fill left panel app content
-        empty_with_margin(nil) -- main content
+        nil -- main content
       }
     },
     {

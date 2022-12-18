@@ -31,13 +31,9 @@ function M.setup(opts)
   M.state = utils.merge_table(default, opts)
   awful.screen.connect_for_each_screen(
     function(s)
-      if s.index == 1 then
-        -- Create the left_panel
-        s.top_panel = top_panel(M.state, s)
-        s.left_panel = left_panel(M.state, s)
-      else
-        s.top_panel = top_panel(M.state, s)
-      end
+      -- Create the left_panel
+      s.top_panel = top_panel(M.state, s)
+      s.left_panel = left_panel(M.state, s)
 
       signals.screen_signals(s, M.updateBarsVisibility)
     end

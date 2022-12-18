@@ -5,7 +5,7 @@ local wibox               = require('wibox')
 local beautiful           = require('beautiful')
 local clickable_container = require('widget.material.clickable-container')
 
-local function bottom_buttons(state, _)
+local function bottom_buttons(state, screen)
   local function button(name)
     local icon = icons[name]
     if state.area == name then
@@ -18,18 +18,23 @@ local function bottom_buttons(state, _)
       widget = mat_icon(icon),
     }
 
-
     local widget = clickable_container(w_icon, function()
-      w_icon.widget:set_icon(icons.selected[name])
-      -- screen:emit_signal('update_layout', name)
+      state.area = name
+      screen:emit_signal('info_area')
     end)
 
+    screen:connect_signal('info_area', function()
+      if state.area == name then
+        w_icon.widget:set_icon(icons.selected[name])
+      else
+        w_icon.widget:set_icon(icons[name])
+      end
+    end)
 
     return {
       w_icon,
       widget = widget
     }
-
   end
 
   local spotify = button('spotify')

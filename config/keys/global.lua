@@ -14,7 +14,7 @@ local function execute_apps(opts)
       { description = 'open a terminal', group = 'launcher' }
     ),
     awful.key(
-      { keys.mod }, 't', function()
+      { keys.mod }, 'e', function()
         awful.spawn(opts.apps.editor)
       end,
       { description = 'open a editor', group = 'launcher' }
@@ -29,70 +29,10 @@ local function execute_apps(opts)
       {},
       'Print',
       function()
-        awful.util.spawn_with_shell('maim -s | xclip -selection clipboard -t image/png')
+        awful.util.spawn_with_shell('maim  ~/Pictures/screenshots/' ..
+          os.date('%Y-%m-%d-%H-%M-%S', os.time()) .. '.jpg')
       end
-    )
-  )
-end
-
-local setup_keys = function(opts)
-  local keys = opts.keys
-
-  local globalKeys =
-  awful.util.table.join(
-    execute_apps(opts),
-    -- Hotkeys
-    awful.key({ keys.mod }, 'F1', function()
-      hotkeys_popup.show_help(nil, awful.screen.focused())
-    end,
-      { description = 'show help', group = 'awesome' }),
-    awful.key({ keys.mod, keys.ctrl }, 'r', function()
-      awesome.restart()
-    end, { description = 'reload awesome', group = 'awesome' }),
-    awful.key({ keys.mod, keys.ctrl }, 'q', awesome.quit, { description = 'quit awesome', group = 'awesome' }),
-    -- Tag browsing
-    awful.key({ keys.mod }, 'w', awful.tag.viewprev, { description = 'view previous', group = 'tag' }),
-    awful.key({ keys.mod }, 's', awful.tag.viewnext, { description = 'view next', group = 'tag' }),
-    awful.key(
-      { keys.mod, keys.sft },
-      'e',
-      function()
-        layout.toggle_info_panel()
-      end,
-      { description = 'toggle panel', group = 'awesome' }
     ),
-    awful.key(
-      { keys.mod },
-      'e',
-      function()
-        layout.toggle()
-      end,
-      { description = 'toggle info panel', group = 'awesome' }
-    ),
-    -- Layout
-    awful.key(
-      { keys.mod, keys.sft },
-      'Tab',
-      function()
-        local len = 0
-        local max = 0
-        local tag = awful.screen.focused().selected_tag
-
-        for i, l in pairs(awful.layout.layouts) do
-          if l == tag.layout then
-            len = i
-          end
-          max = i
-        end
-        if len == max then
-          tag.layout = tag.layouts[1]
-        else
-          tag.layout = tag.layouts[len + 1]
-        end
-      end,
-      { description = 'change tag layout', group = 'layout' }
-    ),
-    -- Dropdown application
     awful.key(
       { keys.mod },
       '$',
@@ -100,8 +40,12 @@ local setup_keys = function(opts)
         toggle_quake()
       end,
       { description = 'dropdown application', group = 'launcher' }
-    ),
-    -- Brightness
+    )
+  )
+end
+
+local function hotkeys(_)
+  return awful.util.table.join(
     awful.key(
       {},
       'XF86MonBrightnessUp',
@@ -184,6 +128,67 @@ local setup_keys = function(opts)
       { description = 'toggle mute', group = 'hotkeys' }
     )
   )
+end
+
+local setup_keys = function(opts)
+  local keys = opts.keys
+
+  local globalKeys =
+  awful.util.table.join(
+    execute_apps(opts),
+    hotkeys(opts),
+    -- Hotkeys
+    awful.key({ keys.mod }, 'F1', function()
+      hotkeys_popup.show_help(nil, awful.screen.focused())
+    end,
+      { description = 'show help', group = 'awesome' }),
+    awful.key({ keys.mod, keys.ctrl }, 'r', function()
+      awesome.restart()
+    end, { description = 'reload awesome', group = 'awesome' }),
+    awful.key({ keys.mod, keys.ctrl }, 'q', awesome.quit, { description = 'quit awesome', group = 'awesome' }),
+    -- Tag browsing
+    awful.key({ keys.mod }, 'w', awful.tag.viewprev, { description = 'view previous', group = 'tag' }),
+    awful.key({ keys.mod }, 's', awful.tag.viewnext, { description = 'view next', group = 'tag' }),
+    awful.key(
+      { keys.mod, keys.sft },
+      't',
+      function()
+        layout.toggle_info_panel()
+      end,
+      { description = 'toggle panel', group = 'awesome' }
+    ),
+    awful.key(
+      { keys.mod },
+      't',
+      function()
+        layout.toggle()
+      end,
+      { description = 'toggle info panel', group = 'awesome' }
+    ),
+    -- Layout
+    awful.key(
+      { keys.mod, keys.sft },
+      'Tab',
+      function()
+        local len = 0
+        local max = 0
+        local tag = awful.screen.focused().selected_tag
+
+        for i, l in pairs(awful.layout.layouts) do
+          if l == tag.layout then
+            len = i
+          end
+          max = i
+        end
+        if len == max then
+          tag.layout = tag.layouts[1]
+        else
+          tag.layout = tag.layouts[len + 1]
+        end
+      end,
+      { description = 'change tag layout', group = 'layout' }
+    )
+  )
 
   -- Bind all key numbers to tags.
   -- Be careful: we use keycodes to make it works on any keyboard layout.
@@ -197,8 +202,7 @@ local setup_keys = function(opts)
       descr_move = { description = 'move focused client to tag #', group = 'tag' }
       descr_toggle_focus = { description = 'toggle focused client on tag #', group = 'tag' }
     end
-    globalKeys =
-    awful.util.table.join(
+    globalKeys = awful.util.table.join(
       globalKeys,
       -- View tag only.
       awful.key(
