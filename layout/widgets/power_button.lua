@@ -22,7 +22,7 @@ local function power_button_widget(_)
         1,
         nil,
         function()
-          exit_screen_show()
+          Exit_screen_show()
         end
       )
     )

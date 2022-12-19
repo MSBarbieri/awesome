@@ -37,7 +37,7 @@ local function execute_apps(opts)
       { keys.mod },
       '$',
       function()
-        toggle_quake()
+        require('module.quake-terminal')()
       end,
       { description = 'dropdown application', group = 'launcher' }
     )
@@ -123,7 +123,7 @@ local function hotkeys(_)
       {},
       'XF86PowerOff',
       function()
-        exit_screen_show()
+        Exit_screen_show()
       end,
       { description = 'toggle mute', group = 'hotkeys' }
     )

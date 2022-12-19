@@ -6,6 +6,8 @@ local icons = require('theme.icons')
 local clickable_container = require('widget.material.clickable-container')
 local dpi = require('beautiful').xresources.apply_dpi
 
+
+local exit_screen_grabber
 -- Appearance
 local function setup_exit_screen(opts)
   local icon_size = beautiful.exit_screen_icon_size or dpi(140)
@@ -38,75 +40,11 @@ local function setup_exit_screen(opts)
     return abutton
   end
 
-  function suspend_command()
-    exit_screen_hide()
-    awful.spawn.with_shell(opts.apps.lock .. ' & systemctl suspend')
-  end
-
-  function exit_command()
-    _G.awesome.quit()
-  end
-
-  function lock_command()
-    exit_screen_hide()
-    awful.spawn.with_shell('sleep 1 && ' .. opts.apps.lock)
-  end
-
-  function poweroff_command()
-    awful.spawn.with_shell('poweroff')
-    awful.keygrabber.stop(_G.exit_screen_grabber)
-  end
-
-  function reboot_command()
-    awful.spawn.with_shell('reboot')
-    awful.keygrabber.stop(_G.exit_screen_grabber)
-  end
-
-  local poweroff = buildButton(icons.power, 'Shutdown')
-  poweroff:connect_signal(
-    'button::release',
-    function()
-      poweroff_command()
-    end
-  )
-
-  local reboot = buildButton(icons.restart, 'Restart')
-  reboot:connect_signal(
-    'button::release',
-    function()
-      reboot_command()
-    end
-  )
-
-  local suspend = buildButton(icons.sleep, 'Sleep')
-  suspend:connect_signal(
-    'button::release',
-    function()
-      suspend_command()
-    end
-  )
-
-  local exit = buildButton(icons.logout, 'Logout')
-  exit:connect_signal(
-    'button::release',
-    function()
-      exit_command()
-    end
-  )
-
-  local lock = buildButton(icons.lock, 'Lock')
-  lock:connect_signal(
-    'button::release',
-    function()
-      lock_command()
-    end
-  )
-
   -- Get screen geometry
   local screen_geometry = awful.screen.focused().geometry
 
   -- Create the widget
-  exit_screen =
+  local exit_screen =
   wibox(
     {
       x = screen_geometry.x,
@@ -122,14 +60,77 @@ local function setup_exit_screen(opts)
   exit_screen.bg = beautiful.background.hue_800 .. 'dd'
   exit_screen.fg = beautiful.exit_screen_fg or beautiful.wibar_fg or '#FEFEFE'
 
-  local exit_screen_grabber
 
-  function exit_screen_hide()
+  local function exit_screen_hide()
     awful.keygrabber.stop(exit_screen_grabber)
     exit_screen.visible = false
   end
 
-  function exit_screen_show()
+  local function suspend_command()
+    exit_screen_hide()
+    awful.spawn.with_shell(opts.apps.lock .. ' & systemctl suspend')
+  end
+
+  local function exit_command()
+    awesome.quit()
+  end
+
+  local function lock_command()
+    exit_screen_hide()
+    awful.spawn.with_shell('sleep 1 && ' .. opts.apps.lock)
+  end
+
+  local function poweroff_command()
+    awful.spawn.with_shell('poweroff')
+    awful.keygrabber.stop(exit_screen_grabber)
+  end
+
+  local function reboot_command()
+    awful.spawn.with_shell('reboot')
+    awful.keygrabber.stop(exit_screen_grabber)
+  end
+
+  local poweroff = buildButton(icons.power)
+  poweroff:connect_signal(
+    'button::release',
+    function()
+      poweroff_command()
+    end
+  )
+
+  local reboot = buildButton(icons.restart)
+  reboot:connect_signal(
+    'button::release',
+    function()
+      reboot_command()
+    end
+  )
+
+  local suspend = buildButton(icons.sleep)
+  suspend:connect_signal(
+    'button::release',
+    function()
+      suspend_command()
+    end
+  )
+
+  local exit = buildButton(icons.logout)
+  exit:connect_signal(
+    'button::release',
+    function()
+      exit_command()
+    end
+  )
+
+  local lock = buildButton(icons.lock)
+  lock:connect_signal(
+    'button::release',
+    function()
+      lock_command()
+    end
+  )
+
+  function Exit_screen_show()
     -- naughty.notify({text = "starting the keygrabber"})
     exit_screen_grabber =
     awful.keygrabber.run(

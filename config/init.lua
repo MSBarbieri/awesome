@@ -24,6 +24,7 @@ local Default = {
 M.setup = function(opts)
   opts = opts or {}
   opts = utils.merge_table(Default, opts)
+  M.settings = opts
 
   local keys = keys_setup(opts)
   root.keys(keys.global)

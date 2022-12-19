@@ -4,9 +4,10 @@ local app = require('configuration.apps').default.quake
 local quake_id = 'notnil'
 local quake_client
 local opened = false
-function create_shell()
+
+local function create_shell()
   quake_id =
-    spawn(
+  spawn(
     app,
     {
       skip_decoration = true
@@ -14,15 +15,15 @@ function create_shell()
   )
 end
 
-function open_quake()
+local function open_quake()
   quake_client.hidden = false
 end
 
-function close_quake()
+local function close_quake()
   quake_client.hidden = true
 end
 
-toggle_quake = function()
+local toggle_quake = function()
   opened = not opened
   if not quake_client then
     create_shell()
@@ -35,7 +36,7 @@ toggle_quake = function()
   end
 end
 
-_G.client.connect_signal(
+client.connect_signal(
   'manage',
   function(c)
     if (c.pid == quake_id) then
@@ -52,7 +53,7 @@ _G.client.connect_signal(
   end
 )
 
-_G.client.connect_signal(
+client.connect_signal(
   'unmanage',
   function(c)
     if (c.pid == quake_id) then
@@ -63,3 +64,4 @@ _G.client.connect_signal(
 )
 
 -- create_shell()
+return toggle_quake

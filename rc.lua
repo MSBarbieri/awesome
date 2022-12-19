@@ -18,9 +18,11 @@ require("module").setup({
     { cmd = 'spotify' },
   },
   lazy_scripts = {
-    { cmd = "kitty" },
+    { cmd = os.getenv('HOME') .. '/.local/scripts/start_animated_background' },
+    { cmd = function()
+      return require('config').settings.apps.editor
+    end },
     -- { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done' },
-    { cmd = os.getenv('HOME') .. '/.local/scripts/start_animated_background' }
   }
 })
 
