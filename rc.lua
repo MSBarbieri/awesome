@@ -16,6 +16,7 @@ require("module").setup({
   startup_scripts = {
     { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
     { cmd = 'spotify' },
+    { cmd = 'discord' },
   },
   lazy_scripts = {
     { cmd = os.getenv('HOME') .. '/.local/scripts/start_animated_background' },

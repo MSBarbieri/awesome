@@ -24,6 +24,12 @@ local function setup_rules(_, keys, buttons)
       }
     },
     {
+      rule_any = { class = { 'discord' } },
+      properties = {
+        tag = screen[1].tags[7]
+      }
+    },
+    {
       rule_any = { class = { 'Spotify' } },
       properties = {
         tag = screen[1].tags[8]
