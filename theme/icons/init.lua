@@ -26,6 +26,8 @@ return {
   thermometer = dir .. '/thermometer.svg',
   plus = dir .. '/plus.svg',
 
+
+  rss = dir .. '/rss.svg',
   brave = dir .. '/brave.svg',
   twitch = dir .. '/twitch.svg',
   spotify = dir .. '/spotify.svg',
@@ -47,6 +49,7 @@ return {
     obs = dir .. '/selected' .. '/obs.svg',
 
     notion = dir .. '/selected' .. '/notion.svg',
+    rss = dir .. '/selected' .. '/rss.svg',
     slack = dir .. '/selected' .. '/slack.svg',
     discord = dir .. '/selected' .. '/discord.svg',
     postman = dir .. '/selected' .. '/postman.svg',

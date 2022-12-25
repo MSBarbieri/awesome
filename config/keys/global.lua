@@ -32,14 +32,6 @@ local function execute_apps(opts)
         awful.util.spawn_with_shell('maim  ~/Pictures/screenshots/' ..
           os.date('%Y-%m-%d-%H-%M-%S', os.time()) .. '.jpg')
       end
-    ),
-    awful.key(
-      { keys.mod },
-      '$',
-      function()
-        require('module.quake-terminal')()
-      end,
-      { description = 'dropdown application', group = 'launcher' }
     )
   )
 end

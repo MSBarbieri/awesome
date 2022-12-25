@@ -18,6 +18,13 @@ local function setup_tags(opts)
       screen     = 1
     },
     {
+      icon       = "rss",
+      type       = 'fluent-reader',
+      class      = "fluent-reader",
+      defaultApp = '',
+      screen     = 1
+    },
+    {
       icon       = "folder",
       type       = 'files',
       class      = "Org.gnome.Nautilus",
@@ -35,12 +42,6 @@ local function setup_tags(opts)
       icon       = "slack",
       type       = 'social',
       defaultApp = "slack",
-      screen     = 1
-    },
-    {
-      icon       = "notion",
-      type       = 'notion',
-      defaultApp = "notion-snap",
       screen     = 1
     },
     {
@@ -63,10 +64,9 @@ local function setup_tags(opts)
       screen     = 1
     },
     {
-      icon       = "lab",
-      type       = 'debug',
-      class      = "None",
-      defaultApp = '',
+      icon       = "notion",
+      type       = 'notion',
+      defaultApp = "notion-snap",
       screen     = 1
     },
   }

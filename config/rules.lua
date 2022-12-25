@@ -30,6 +30,12 @@ local function setup_rules(_, keys, buttons)
       }
     },
     {
+      rule_any = { class = { 'fluent-reader' } },
+      properties = {
+        tag = screen[1].tags[3]
+      }
+    },
+    {
       rule_any = { class = { 'Spotify' } },
       properties = {
         tag = screen[1].tags[8]
