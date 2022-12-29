@@ -157,6 +157,22 @@ local setup_keys = function(opts)
       end,
       { description = 'toggle info panel', group = 'awesome' }
     ),
+    awful.key(
+      { keys.mod },
+      'F11',
+      function()
+       awful.spawn('setxkbmap -layout my_us -variant dvp -option "caps:swapescape"') 
+      end,
+      { description = 'change keyboard layout', group = 'awesome' }
+    ),
+    awful.key(
+      { keys.mod },
+      'F12',
+      function()
+       awful.spawn('setxkbmap -layout my_us -option "caps:swapescape"') 
+      end,
+      { description = 'change keyboard layout', group = 'awesome' }
+    ),
     -- Layout
     awful.key(
       { keys.mod, keys.sft },
