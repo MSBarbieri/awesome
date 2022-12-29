@@ -1,5 +1,6 @@
 require("awful.autofocus")
 require("error_handler")
+local utils = require('utils')
 
 require('theme').setup({
   wallpaper = "/home/matheus-barbieri/Pictures/wallpapers/wallpaper"
@@ -14,26 +15,25 @@ require('layout').setup({
 
 require("module").setup({
   startup_scripts = {
-    { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
+    { cmd = 'picom --config=' ..os.getenv('HOME') .. '/.config/picom/picom.conf' },
     { cmd = 'spotify' },
-    { cmd = 'discord' },
-    { cmd = 'fluent_reader' },
+    {  cmd = 'discord' },
+    { cmd = 'fluent-reader' },
   },
   lazy_scripts = {
-    { cmd = os.getenv('HOME') .. '/.local/scripts/start_animated_background' },
+
+    { cmd = 'glava -d' },
     { cmd = function()
       return require('config').settings.apps.editor
     end },
-    -- { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done' },
+    { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done' },
   }
 })
 
 require("config").setup({
   apps = {
-    browser = 'brave-browser',
+    browser = 'brave',
     launcher = os.getenv('HOME') .. "/.config/rofi/launchers/type-4/launcher.sh",
-    editor = 'kitty ' ..
-        os.getenv('HOME') .. '/.local/bin/tmux-sessionizer ' ..
-        os.getenv('HOME'),
+    editor = 'kitty tmux'
   },
 })
