@@ -15,10 +15,10 @@ require('layout').setup({
 
 require("module").setup({
   startup_scripts = {
-    { cmd = 'picom --config=' ..os.getenv('HOME') .. '/.config/picom/picom.conf' },
+    { cmd = 'picom --config=' .. os.getenv('HOME') .. '/.config/picom/picom.conf' },
     { cmd = 'spotify' },
-    {  cmd = 'discord' },
-    { cmd = 'fluent-reader' },
+    { cmd = 'discord' },
+    { cmd = 'pidgin' },
   },
   lazy_scripts = {
 
