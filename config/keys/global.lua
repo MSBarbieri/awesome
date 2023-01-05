@@ -161,7 +161,7 @@ local setup_keys = function(opts)
       { keys.mod },
       'F11',
       function()
-       awful.spawn('setxkbmap -layout my_us -variant dvp -option "caps:swapescape"') 
+        awful.spawn('setxkbmap -layout my_us -variant dvp -option "caps:swapescape"')
       end,
       { description = 'change keyboard layout', group = 'awesome' }
     ),
@@ -169,7 +169,7 @@ local setup_keys = function(opts)
       { keys.mod },
       'F12',
       function()
-       awful.spawn('setxkbmap -layout my_us -option "caps:swapescape"') 
+        awful.spawn('setxkbmap -layout my_us -option "caps:swapescape"')
       end,
       { description = 'change keyboard layout', group = 'awesome' }
     ),
