@@ -1,3 +1,4 @@
+local awful = require('awful')
 local M = {}
 M.log = function(title, txt)
   local naughty = require("naughty")
@@ -22,6 +23,27 @@ M.merge_table = function(t1, t2)
     end
   end
   return t1
+end
+
+M.filter_command = function(cmd)
+  local findme = cmd
+  local firstspace = cmd:find(" ")
+  if firstspace then
+    findme = cmd:sub(0, firstspace - 1)
+  end
+  return string.format("pgrep -u $USER %s > /dev/null || (%s)", findme, cmd)
+end
+
+M.restart = function(cmd)
+  local findme = cmd
+  local firstspace = cmd:find(" ")
+  if firstspace then
+    findme = cmd:sub(0, firstspace - 1)
+  end
+
+  return string.format(
+    "for pid in $(ps -ef | awk '/%s/ {print $2}'); do kill -9 $pid; done;",
+    findme)
 end
 
 return M

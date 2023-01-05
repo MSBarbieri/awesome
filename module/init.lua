@@ -10,8 +10,8 @@ local Default = {
   apps = {
     lock = nil,
   },
-  startup_scripts = {
-    { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
+  execute = {
+    -- { cmd = 'picom --config=$HOME/.config/picom/picom.conf --experimental-backends' },
   }
 }
 local M = {}
@@ -19,6 +19,7 @@ local M = {}
 M.setup = function(opts)
   opts = opts or {}
   opts = utils.merge_table(Default, opts)
+  M.opts = opts
 
   auto_start(opts)
   notifications_setup(opts)
