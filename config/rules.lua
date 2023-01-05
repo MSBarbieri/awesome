@@ -24,19 +24,19 @@ local function setup_rules(_, keys, buttons)
       }
     },
     {
+      rule_any = { class = { 'Pidgin' } },
+      properties = {
+        tag = screen[1].tags[6]
+      }
+    },
+    {
       rule_any = { class = { 'discord' } },
       properties = {
         tag = screen[1].tags[7]
       }
     },
     {
-      rule_any = { class = { 'fluent-reader' } },
-      properties = {
-        tag = screen[1].tags[3]
-      }
-    },
-    {
-      rule_any = { class = { 'Spotify' } },
+      rule_any = { class = { '^Spotify', '^spotify' } },
       properties = {
         tag = screen[1].tags[8]
       }

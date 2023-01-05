@@ -1,5 +1,4 @@
 local awful = require('awful')
-local icons = require('theme.icons')
 
 local function setup_tags(opts)
   local tags = {
@@ -54,7 +53,6 @@ local function setup_tags(opts)
       icon       = "spotify",
       type       = 'music',
       defaultApp = "spotify",
-      class      = "Spotify",
       screen     = 1
     },
     {
@@ -99,7 +97,7 @@ local function setup_tags(opts)
     end
   )
 
-  _G.tag.connect_signal(
+  tag.connect_signal(
     'property::layout',
     function(t)
       local currentLayout = awful.tag.getproperty(t, 'layout')
