@@ -1,3 +1,5 @@
+local awful = require('awful')
+
 local function setup_signals(callback)
   -- Hide bars when app go fullscreen
   tag.connect_signal(
@@ -17,8 +19,14 @@ local function setup_signals(callback)
 
   client.connect_signal(
     'manage',
-    function(_)
-      callback("manage")
+    function(c)
+      if c.class == nil then
+        c.minimized = true
+        c:connect_signal("property::class", function()
+          c.minimized = false
+          awful.rules.apply(c)
+        end)
+      end
     end
   )
 
@@ -34,18 +42,6 @@ local function setup_signals(callback)
 end
 
 local function screen_signals(screen, callback)
-  local dpi = require('beautiful').xresources.apply_dpi
-
-  screen:connect_signal('toggle_panel', function(_, opened)
-    local size = dpi(80)
-    if opened then
-      size = dpi(360)
-    end
-
-    screen.top_panel.width = screen.geometry.width - size
-    screen.top_panel.x = screen.geometry.x + size
-  end)
-
   screen:connect_signal('toggle_layout', function()
     callback()
   end)

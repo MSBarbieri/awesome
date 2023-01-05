@@ -1,5 +1,5 @@
 local awful = require('awful')
-local left_panel = require('layout.left-panel')
+local vertical_panel = require('layout.vertical-panel')
 local top_panel = require('layout.top-panel')
 local signals = require('layout.signals')
 local utils = require("utils")
@@ -11,6 +11,7 @@ local default = {
   opened = true,
   area = "twitch",
   enabled = true,
+  position = "left"
 }
 
 function M.updateBarsVisibility(_)
@@ -33,7 +34,7 @@ function M.setup(opts)
     function(s)
       -- Create the left_panel
       s.top_panel = top_panel(M.state, s)
-      s.left_panel = left_panel(M.state, s)
+      s.left_panel = vertical_panel(M.state, s)
 
       signals.screen_signals(s, M.updateBarsVisibility)
     end

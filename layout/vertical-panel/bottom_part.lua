@@ -34,23 +34,43 @@ local function bottom_part(state, screen)
     )
   )
 
-  return {
-    layout = wibox.layout.align.horizontal,
-    {
-      forced_height = dpi(80),
-      forced_width = dpi(80),
-      widget = wibox.container.background,
-      bg = beautiful.background.hue_800,
-      plus_button
-    },
-    {
-      widget = wibox.container.background,
-      bg = beautiful.background.hue_800,
-      forced_height = dpi(80),
-      widgets.bottom_buttons(state, screen)
-    },
-    nil
-  }
+  if state.position == "right" then
+    return {
+      layout = wibox.layout.align.horizontal,
+      nil,
+      {
+        widget = wibox.container.background,
+        bg = beautiful.background.hue_800,
+        forced_height = dpi(80),
+        widgets.bottom_buttons(state, screen)
+      },
+      {
+        forced_height = dpi(80),
+        forced_width = dpi(80),
+        widget = wibox.container.background,
+        bg = beautiful.background.hue_800,
+        plus_button
+      },
+    }
+  else
+    return {
+      layout = wibox.layout.align.horizontal,
+      {
+        forced_height = dpi(80),
+        forced_width = dpi(80),
+        widget = wibox.container.background,
+        bg = beautiful.background.hue_800,
+        plus_button
+      },
+      {
+        widget = wibox.container.background,
+        bg = beautiful.background.hue_800,
+        forced_height = dpi(80),
+        widgets.bottom_buttons(state, screen)
+      },
+      nil
+    }
+  end
 end
 
 return bottom_part

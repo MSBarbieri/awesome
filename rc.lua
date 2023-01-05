@@ -8,10 +8,8 @@ require('theme').setup({
 })
 
 require('layout').setup({
-  enabled = false,
+  enabled = true,
   opened = false,
-  area = "twitch",
-})
 
 require("module").setup({
   startup_scripts = {
