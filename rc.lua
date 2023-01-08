@@ -8,7 +8,7 @@ require('theme').setup({
 })
 
 require('layout').setup({
-  enabled = true,
+  enabled = false,
   opened = false,
   area = "obs",
   position = "right"
