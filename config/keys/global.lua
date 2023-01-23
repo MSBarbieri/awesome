@@ -29,8 +29,7 @@ local function execute_apps(opts)
       {},
       'Print',
       function()
-        awful.util.spawn_with_shell('maim  ~/Pictures/screenshots/' ..
-          os.date('%Y-%m-%d-%H-%M-%S', os.time()) .. '.jpg')
+        awful.util.spawn_with_shell('flameshot gui')
       end
     )
   )
