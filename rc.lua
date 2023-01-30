@@ -24,17 +24,17 @@ require("config").setup({
 
 require("module").setup({
   execute = {
-    { cmd = 'discord', type = "app", opts = { tag = awful.screen.focused().tags[7] } },
+    -- { cmd = 'discord', type = "app", opts = { tag = awful.screen.focused().tags[7] } },
     { cmd = 'pidgin', type = "app", opts = { tag = awful.screen.focused().tags[6] } },
-    { cmd = 'spotify', type = "app", opts = { tag = awful.screen.focused().tags[8] } },
+    -- { cmd = 'spotify', type = "app", opts = { tag = awful.screen.focused().tags[8] } },
     { cmd = 'picom', type = "app" },
     { cmd = function()
       return require('config').settings.apps.browser
     end, type = "app" },
-    { cmd = function()
-      return require('config').settings.apps.editor
-    end, type = "script", opts = { sleep = 1 } },
-    { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done;glava -d',
-      type = "script", opts = { sleep = 1 } },
+    -- { cmd = function()
+    --   return require('config').settings.apps.editor
+    -- end, type = "script", opts = { sleep = 1 } },
+    -- { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done;glava -d',
+    --   type = "script", opts = { sleep = 1 } },
   }
 })
