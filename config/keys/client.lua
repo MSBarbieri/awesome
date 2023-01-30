@@ -6,7 +6,7 @@ local function client_layout_mode(opts)
   return awful.util.table.join(
     awful.key(
       { keys.mod },
-      'f',
+      'z',
       function(c)
         c.fullscreen = not c.fullscreen
         c:raise()
@@ -15,11 +15,11 @@ local function client_layout_mode(opts)
     ),
     awful.key(
       { keys.mod },
-      'm',
+      'f',
       function()
         client.focus.floating = not client.focus.floating
       end,
-      { description = 'focus next by index', group = 'client' }
+      { description = 'toggle floating', group = 'client' }
     )
   )
 end

@@ -5,6 +5,7 @@ local gears           = require('gears')
 local mat_icon_button = require('widget.material.icon-button')
 local mat_icon        = require('widget.material.icon')
 local utils           = require('utils')
+local TaskList        = require('widget.task-list')
 
 local dpi = require('beautiful').xresources.apply_dpi
 
@@ -83,7 +84,7 @@ local TopPanel = function(state, screen)
     {
       layout = wibox.layout.fixed.horizontal,
       -- Create a taglist widget
-      -- TaskList(s),
+      TaskList(screen),
       -- add_button
     },
     nil,

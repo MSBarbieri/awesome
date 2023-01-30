@@ -101,7 +101,7 @@ local function setup_theme(opts)
   theme.border_focus = '#222222'
 
   theme.notification_border_color = '#585858FF'
-  theme.notification_bg = "#26262644"
+  theme.notification_bg = "#262626AA"
 
   return theme
 end

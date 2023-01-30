@@ -70,10 +70,10 @@ local function setup_tags(opts)
   }
 
   awful.layout.layouts = {
+    awful.layout.suit.max,
     awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.floating,
-    awful.layout.suit.max
   }
 
   awful.screen.connect_for_each_screen(
@@ -85,7 +85,7 @@ local function setup_tags(opts)
             icon = tag.icon,
             selected_icon = tag.selected_icon or tag.icon,
             icon_only = false,
-            layout = tag.layout or awful.layout.suit.tile,
+            layout = tag.layout or awful.layout.suit.max,
             gap_single_client = false,
             gap = 0,
             screen = s,

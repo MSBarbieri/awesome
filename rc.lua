@@ -8,7 +8,7 @@ require('theme').setup({
 })
 
 require('layout').setup({
-  enabled = false,
+  enabled = true,
   opened = false,
   area = "obs",
   position = "right"
@@ -18,7 +18,7 @@ require("config").setup({
   apps = {
     browser = 'brave',
     launcher = os.getenv('HOME') .. "/.config/rofi/launchers/type-4/launcher.sh",
-    editor = 'kitty tmux'
+    editor = 'kitty tmux-sessionizer ' .. os.getenv('HOME')
   },
 })
 
@@ -29,8 +29,11 @@ require("module").setup({
     { cmd = 'spotify', type = "app", opts = { tag = awful.screen.focused().tags[8] } },
     { cmd = 'picom', type = "app" },
     { cmd = function()
+      return require('config').settings.apps.browser
+    end, type = "app" },
+    { cmd = function()
       return require('config').settings.apps.editor
-    end, type = "script" },
+    end, type = "script", opts = { sleep = 1 } },
     { cmd = 'while [ -n "$(playerctl play -p spotify 2>&1 >/dev/null)" ]; do sleep 1; done;glava -d',
       type = "script", opts = { sleep = 1 } },
   }

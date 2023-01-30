@@ -2,6 +2,7 @@ local awful = require('awful')
 require('awful.autofocus')
 local hotkeys_popup = require('awful.hotkeys_popup').widget
 local layout        = require('layout')
+local utils         = require('utils')
 
 local function execute_apps(opts)
   local keys = opts.keys
@@ -192,8 +193,43 @@ local setup_keys = function(opts)
         else
           tag.layout = tag.layouts[len + 1]
         end
+        utils.log("change layout", tag.layout.name)
       end,
       { description = 'change tag layout', group = 'layout' }
+    ),
+    awful.key(
+      { keys.mod, keys.sft },
+      'z',
+      function()
+        local tag = awful.screen.focused().selected_tag
+        tag.layout = awful.layout.suit.max
+        utils.log("change layout", tag.layout.name)
+      end,
+      { description = 'set layout as max', group = 'layout' }
+    ),
+    awful.key(
+      { keys.mod, keys.sft },
+      'f',
+      function()
+        local tag = awful.screen.focused().selected_tag
+        tag.layout = awful.layout.suit.floating
+        utils.log("change layout", tag.layout.name)
+      end,
+      { description = 'set layout as floating', group = 'layout' }
+    ),
+    awful.key(
+      { keys.mod, keys.sft },
+      'm',
+      function()
+        local tag = awful.screen.focused().selected_tag
+        if tag.layout == awful.layout.suit.tile then
+          tag.layout = awful.layout.suit.tile.bottom
+        else
+          tag.layout = awful.layout.suit.tile
+        end
+        utils.log("change layout", tag.layout.name)
+      end,
+      { description = 'set layout as tile', group = 'layout' }
     )
   )
 
